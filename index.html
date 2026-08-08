@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ritual+ · City Square Triple-Dip Farm (PoE 3.29)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08090d;
+    --card: #10131b;
+    --card-deep: #0c0f16;
+    --inset: #151926;
+    --line: #252b3b;
+    --line-soft: #1b2030;
+    --text: #d6d2c4;
+    --muted: #8f8b7d;
+    --faint: #6b675c;
+    --red: #c73434;
+    --red-bright: #e05252;
+    --red-glow: rgba(199, 52, 52, 0.12);
+    --gold: #d9b264;
+    --gold-bright: #eed7a1;
+    --gold-glow: rgba(217, 178, 100, 0.10);
+    --blue: #6fa0d8;
+    --blue-bright: #9dc2ec;
+    --blue-glow: rgba(111, 160, 216, 0.10);
+    --display: "Cinzel", "Palatino Linotype", Palatino, Georgia, serif;
+    --body: "Segoe UI", system-ui, -apple-system, sans-serif;
+    --mono: Consolas, "Cascadia Mono", monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { background: var(--bg); }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.55;
+    padding: 28px 16px 48px;
+  }
+
+  .sheet { max-width: 1100px; margin: 0 auto; }
+
+  /* ---------- banner + masthead ---------- */
+  .banner {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(199, 52, 52, 0.08), 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+  .banner img { display: block; width: 100%; height: auto; }
+
+  .masthead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    padding: 20px 4px 6px;
+  }
+  .masthead h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0.06em;
+    color: var(--gold-bright);
+    text-wrap: balance;
+  }
+  .masthead h1 .plus { color: var(--red-bright); }
+  .masthead .patch {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .tagline {
+    padding: 0 4px 18px;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .tagline strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- the loop strip ---------- */
+  .loop {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: var(--card-deep);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 26px;
+  }
+  .loop .step {
+    flex: 1 1 150px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--inset);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    padding: 9px 12px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .loop .step b { color: var(--gold-bright); font-weight: 600; display: block; font-size: 12.5px; }
+  .loop .step .n {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--red-bright);
+    flex: none;
+  }
+  .loop .arrow {
+    align-self: center;
+    color: var(--faint);
+    font-size: 15px;
+    flex: none;
+    padding: 0 1px;
+  }
+
+  /* ---------- sections ---------- */
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  section .head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 14px 20px 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  section .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--faint);
+  }
+  section h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+  }
+  section .body { padding: 16px 20px 20px; }
+
+  section.ritual { border-top: 2px solid var(--red); }
+  section.ritual h2 { color: var(--red-bright); }
+  section.ritual .head { background: linear-gradient(to right, var(--red-glow), transparent 55%); }
+
+  section.gold-s { border-top: 2px solid var(--gold); }
+  section.gold-s h2 { color: var(--gold); }
+  section.gold-s .head { background: linear-gradient(to right, var(--gold-glow), transparent 55%); }
+
+  section.kalguur { border-top: 2px solid var(--blue); }
+  section.kalguur h2 { color: var(--blue-bright); }
+  section.kalguur .head { background: linear-gradient(to right, var(--blue-glow), transparent 55%); }
+
+  /* ---------- tables ---------- */
+  .tbl-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding: 4px 14px 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  td {
+    padding: 10px 14px 10px 0;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; padding-bottom: 2px; }
+  td.k { color: var(--gold-bright); font-weight: 600; white-space: nowrap; width: 1%; padding-right: 24px; }
+  td.v { color: var(--text); white-space: nowrap; width: 1%; padding-right: 24px; }
+  td.d { color: var(--muted); }
+  td.d strong, td.d b { color: var(--text); font-weight: 600; }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    padding: 2px 9px;
+    border-radius: 3px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .pill.red { color: var(--red-bright); border-color: rgba(199, 52, 52, 0.5); background: var(--red-glow); }
+  .pill.gold { color: var(--gold-bright); border-color: rgba(217, 178, 100, 0.45); background: var(--gold-glow); }
+  .pill.blue { color: var(--blue-bright); border-color: rgba(111, 160, 216, 0.45); background: var(--blue-glow); }
+
+  a { color: var(--blue-bright); text-decoration: none; border-bottom: 1px dotted rgba(111, 160, 216, 0.5); }
+  a:hover, a:focus-visible { color: #c3dcf6; border-bottom-style: solid; outline: none; }
+
+  /* ---------- route cards ---------- */
+  .route { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+  @media (max-width: 760px) { .route { grid-template-columns: 1fr; } }
+  .route .rc {
+    background: var(--inset);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    padding: 13px 15px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .route .rc .rn {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--red-bright);
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .route .rc .rn span { color: var(--text); }
+  .route .rc b { color: var(--text); font-weight: 600; }
+
+  /* ---------- callout ---------- */
+  .callout {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--red-glow);
+    border: 1px solid rgba(199, 52, 52, 0.35);
+    border-radius: 4px;
+    padding: 11px 14px;
+    margin-top: 14px;
+    font-size: 13.5px;
+    color: var(--text);
+  }
+  .callout .ico { color: var(--red-bright); font-family: var(--display); font-weight: 700; flex: none; }
+  .callout.gold-c { background: var(--gold-glow); border-color: rgba(217, 178, 100, 0.35); }
+  .callout.gold-c .ico { color: var(--gold); }
+
+  /* ---------- stat tiles ---------- */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat {
+    background: var(--card-deep);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    padding: 12px 14px 10px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--blue-bright);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+  }
+  .stat .num.gold-n { color: var(--gold-bright); }
+  .stat .lbl {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-top: 3px;
+  }
+
+  /* ---------- two column split ---------- */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+  .split section { margin-bottom: 0; }
+  .split-row { margin-bottom: 22px; }
+
+  ul.plain { list-style: none; }
+  ul.plain li { padding: 7px 0; border-bottom: 1px solid var(--line-soft); color: var(--muted); font-size: 14px; }
+  ul.plain li:last-child { border-bottom: none; }
+  ul.plain li b { color: var(--text); font-weight: 600; }
+  ul.plain li::before { content: "◆"; color: var(--blue); font-size: 9px; margin-right: 9px; vertical-align: 2px; }
+
+  footer {
+    padding: 6px 4px 0;
+    color: var(--faint);
+    font-size: 12.5px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="banner">
+    <img src="ritualplusfarmstrat.png" alt="Ritual+ banner: Ritual, Ores &amp; Shipments, Heist Blueprints (Path of Exile)">
+  </div>
+
+  <div class="masthead">
+    <h1>Ritual<span class="plus">+</span> &middot; City Square Triple-Dip</h1>
+    <span class="patch">PoE 3.29 &middot; T16 &middot; CHEATSHEET</span>
+  </div>
+  <p class="tagline">
+    One map, three paychecks: <strong>Ritual tribute farming</strong> feeds you omens and raw divs,
+    the <strong>Kalguuran Scarab</strong> turns Sulphite into ore for Kingsmarch shipments, and
+    <strong>Smuggler&rsquo;s Caches</strong> toss in Blueprints you sell without ever running Heist.
+  </p>
+
+  <div class="loop">
+    <div class="step"><span class="n">I</span><div><b>Run it</b>8-mod T16 City Square</div></div>
+    <span class="arrow">&#10148;</span>
+    <div class="step"><span class="n">II</span><div><b>Bleed it</b>Drag all 3 bosses into Rituals</div></div>
+    <span class="arrow">&#10148;</span>
+    <div class="step"><span class="n">III</span><div><b>Mine it</b>Sulphite deposits &rarr; ore</div></div>
+    <span class="arrow">&#10148;</span>
+    <div class="step"><span class="n">IV</span><div><b>Ship it</b>4M bars + 4M dust &rarr; Moti Aro</div></div>
+    <span class="arrow">&#10148;</span>
+    <div class="step"><span class="n">V</span><div><b>Profit</b>Tattoos, divs, Fracturing Orbs</div></div>
+  </div>
+
+  <section class="ritual">
+    <div class="head"><span class="eyebrow">01 &middot; SETUP</span><h2>Core Setup &amp; Map Selection</h2></div>
+    <div class="body tbl-wrap">
+      <table>
+        <tr><th>Category</th><th>Setting</th><th>Why</th></tr>
+        <tr>
+          <td class="k">Map</td>
+          <td class="v"><span class="pill red">T16 8-mod City Square</span></td>
+          <td class="d">Three <strong>fixed bosses</strong> spawn in the central plaza. Boss kills inside a Ritual
+            circle give massive Tribute. Buy or roll <strong>8-mod maps</strong> to increase the chance for an
+            Anomaly.</td>
+        </tr>
+        <tr>
+          <td class="k">Astrolabe</td>
+          <td class="v">Nameless Astrolabe</td>
+          <td class="d">Socket a <strong>Nameless Astrolabe</strong> onto City Square. Farm the full cycle,
+            then cash out the <strong>Memory Vault</strong> at the end for free divines on top.</td>
+        </tr>
+        <tr>
+          <td class="k">Atlas Tree</td>
+          <td class="v">Custom Ritual+ tree</td>
+          <td class="d">Every Ritual node (max altars, Tribute gain, free rerolls, deferral), plus Niko /
+            Sulphite nodes (the Sulphite deposits get converted into ore) and the Smuggler&rsquo;s Cache nodes.
+            <a href="https://poeplanner.com/atlas-tree" target="_blank" rel="noopener">Build it on PoePlanner &rarr;</a></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="gold-s">
+    <div class="head"><span class="eyebrow">02 &middot; JUICE</span><h2>Scarab Setup</h2></div>
+    <div class="body tbl-wrap">
+      <table>
+        <tr><th>Slot</th><th>Scarab</th><th>Purpose</th></tr>
+        <tr>
+          <td class="k">1 &ndash; 2</td>
+          <td class="v">2&times; Ritual Scarab of Selectiveness</td>
+          <td class="d"><strong>Free reward rerolls.</strong> Fish every altar for Omens, raw Divines and
+            fractured bases. Skip the vendor trash without paying Tribute for it.</td>
+        </tr>
+        <tr>
+          <td class="k">3 &ndash; 4</td>
+          <td class="v">2&times; Ritual Scarab of Abundance</td>
+          <td class="d"><strong>More loot inside the ritual window.</strong></td>
+        </tr>
+        <tr>
+          <td class="k">5</td>
+          <td class="v">1&times; Kalguuran Scarab</td>
+          <td class="d"><strong>More ores for shipments.</strong></td>
+        </tr>
+      </table>
+      <div class="callout gold-c">
+        <span class="ico">&#8635;</span>
+        <div><b>Vessel swap:</b> in the last 1&ndash;3 maps of each Astrolabe cycle, drop the Kalguuran Scarab
+          and socket a <b>Blood-filled Vessel</b> instead. The stored ritual monsters respawn with juiced
+          Tribute and a fatter reward pool.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ritual">
+    <div class="head"><span class="eyebrow">03 &middot; ROUTE</span><h2>In-Map Route</h2></div>
+    <div class="body">
+      <div class="route" style="margin-top:0;">
+        <div class="rc">
+          <span class="rn">1 &middot; <span>Boss plaza first</span></span>
+          Check mid. If a Ritual spawned inside the boss arena, kill <b>all three bosses</b> in the circle.
+          If not, pull the bosses over to the nearest one. Their Tribute carries into <b>every later
+          altar</b>, so don&rsquo;t pop a single Ritual before it&rsquo;s done.
+        </div>
+        <div class="rc">
+          <span class="rn">2 &middot; <span>Outer ring &amp; altars</span></span>
+          Clear the grid outward, hitting the remaining Rituals. Take the <b>Eldritch altars</b> with the
+          fattest loot multipliers, and skip the ones that would brick your build.
+        </div>
+        <div class="rc">
+          <span class="rn">3 &middot; <span>Ore &amp; caches</span></span>
+          Mine every <b>ore deposit</b> and crack every <b>Smuggler&rsquo;s Cache</b> on route. If slow ores
+          (Verisium / Amber) tank your maps-per-hour, leave them in the ground.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kalguur">
+    <div class="head"><span class="eyebrow">04 &middot; SHIP</span><h2>Kingsmarch Shipping Engine</h2></div>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="num">4M</div><div class="lbl">Bar value loaded</div></div>
+        <div class="stat"><div class="num">+4M</div><div class="lbl">Thaumaturgic dust</div></div>
+        <div class="stat"><div class="num">&asymp;8M</div><div class="lbl">Shipment value</div></div>
+        <div class="stat"><div class="num gold-n">5&ndash;15</div><div class="lbl">Div per ship</div></div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Setting</th><th>Target</th><th>Details</th></tr>
+          <tr>
+            <td class="k">Workers</td>
+            <td class="v">Level 5+</td>
+            <td class="d">Upgraded <strong>miners, smelters, disenchanters and shippers</strong>.</td>
+          </tr>
+          <tr>
+            <td class="k">Port</td>
+            <td class="v"><span class="pill blue">MOTI ARO ONLY</span></td>
+            <td class="d">Every shipment goes to Moti Aro. Its reward table carries the
+              <strong>Herald Tattoos</strong>.</td>
+          </tr>
+          <tr>
+            <td class="k">Favored</td>
+            <td class="v">Ores only (~150%)</td>
+            <td class="d">Reroll favored resources until the list is <strong>pure ores</strong>, then fill the
+              favored slots first before topping up the rest evenly.</td>
+          </tr>
+          <tr>
+            <td class="k">Load</td>
+            <td class="v">4M in bars</td>
+            <td class="d"><strong>Smelt everything, never ship raw ore.</strong> A bar is worth 5&times;
+              the ore it came from. Load ~4M total value once favored demands are met.</td>
+          </tr>
+          <tr>
+            <td class="k">Dust</td>
+            <td class="v">+4M dust</td>
+            <td class="d">Dust <strong>doubles</strong> shipment value up to a 1:1 match, then falls off a
+              cliff. 4M bars + 4M dust &asymp; 8M shipment. Don&rsquo;t over-dust past that.</td>
+          </tr>
+          <tr>
+            <td class="k">Returns</td>
+            <td class="v"><span class="pill gold">5&ndash;15 div / ship</span></td>
+            <td class="d"><strong>Herald Tattoos</strong> sell high, but even without them the 2&ndash;4 raw
+              Divines and a roughly <strong>50% shot at a Fracturing Orb</strong> per shipment are solid
+              currency on their own.</td>
+          </tr>
+          <tr>
+            <td class="k">Dust calc</td>
+            <td class="v">PoE Dust Tool</td>
+            <td class="d"><a href="https://poe-disenchant-tool.vercel.app/allflame" target="_blank" rel="noopener">
+              poe-disenchant-tool.vercel.app/allflame</a>. Check which uniques are worth more as dust
+              than on trade before disenchanting.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="kalguur">
+    <div class="head"><span class="eyebrow">05 &middot; SIDE HUSTLE</span><h2>Heist Blueprints</h2></div>
+    <div class="body">
+      <ul class="plain">
+        <li><b>Sell fully revealed Blueprints raw on trade.</b> The reveal cost <i>is</i> the value; no need
+          to run the Grand Heist yourself.</li>
+        <li><b>Price-check before dumping:</b> Blueprints with <b>Experimental Items and Currency or
+          Scarabs</b> are the expensive ones. Everything else goes in the bulk tab.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Bring your own build: anything that clears 8-mods fast and doesn&rsquo;t die standing in circles.</span>
+    <span>Fan-made cheatsheet &middot; PoE 3.29 &middot; not affiliated with GGG</span>
+  </footer>
+
+</div>
+</body>
+</html>
