@@ -208,6 +208,26 @@
   a { color: var(--blue-bright); text-decoration: none; border-bottom: 1px dotted rgba(111, 160, 216, 0.5); }
   a:hover, a:focus-visible { color: #c3dcf6; border-bottom-style: solid; outline: none; }
 
+  .btn-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--gold-bright);
+    background: var(--gold-glow);
+    border: 1px solid rgba(217, 178, 100, 0.55);
+    border-radius: 3px;
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+  .btn-link:hover, .btn-link:focus-visible {
+    color: var(--gold-bright);
+    background: rgba(217, 178, 100, 0.22);
+    border: 1px solid var(--gold);
+  }
+
   /* ---------- route cards ---------- */
   .route { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
   @media (max-width: 760px) { .route { grid-template-columns: 1fr; } }
@@ -350,8 +370,8 @@
           <td class="k">Atlas Tree</td>
           <td class="v">Custom Ritual+ tree</td>
           <td class="d">Every Ritual node (max altars, Tribute gain, free rerolls, deferral), plus Niko /
-            Sulphite nodes (the Sulphite deposits get converted into ore) and the Smuggler&rsquo;s Cache nodes.
-            <a href="https://poeplanner.com/atlas-tree" target="_blank" rel="noopener">Build it on PoePlanner &rarr;</a></td>
+            Sulphite nodes (the Sulphite deposits get converted into ore) and the Smuggler&rsquo;s Cache nodes.<br>
+            <a class="btn-link" href="https://poeplanner.com/atlas-tree/BQAcAACKANvW-CtGL8pJZeIvyeu73FzioUnssvrTe7fl3qKQFyx3RJWGtC3WCHqhjTZrSgnKZh7PPFk1zGWQcMbSSDJhg45RKIxBzgCKgjo-mlWN6nzj0-lP9x-xucOMkbK_HX2baX2RpsEKe9xpqgraFASSsZ2iUk3X1yu_3E9dIkjUj9aa0LzcIanOqdHX_uW64Qf3Ms6cw3lrIVF3gqe9x6FoEXMBemvg2FXNPx3KRTpmMMKvBCvPR3_is8c-Rvux61_EhU3c0W1OG02RKyClHSQyiifRKsQfK6AO-YWj8P1QcGEVSrg6dsGT49RxC2PR2voda102M8aiU7XThpBmH4YGw7tx4gFj1GytV2-1GaOZuXa4K7e42RQAH4sIAAAAAAAAAwMAAAAAAAAAAAA=" target="_blank" rel="noopener">Ritual+ Atlas Tree &rarr;</a></td>
         </tr>
       </table>
     </div>
